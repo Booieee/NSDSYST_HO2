@@ -1,44 +1,37 @@
-// logger.proto
 syntax = "proto3"; 
-
 package logger;
 
-// The central logging service definition
-service EventLogger {
-  // Method to send a log to the server
+service EventLogger 
+{
   rpc LogEvent (LogRequest) returns (LogResponse); 
-
-  // Method to query logs by node name
   rpc GetNodeLogs (NodeRequest) returns (LogList);
-  
-  // NEW: Method to query global logs by severity
   rpc GetSeverityLogs (SeverityRequest) returns (LogList);
 }
 
-// Request payload for sending a log
-message LogRequest {
+message LogRequest 
+{
   string node_name = 1;
   string severity = 2;
   string message = 3;
 }
 
-// Response from the server after logging
-message LogResponse {
+message LogResponse 
+{
   bool success = 1;
 }
 
-// Request payload for querying a specific node
-message NodeRequest {
+message NodeRequest 
+{
   string node_name = 1;
 }
 
-// NEW: Request payload for querying logs by severity
-message SeverityRequest {
+message SeverityRequest 
+{
   string severity = 1;
 }
 
-// A single log entry structure
-message LogEntry {
+message LogEntry 
+{
   string timestamp = 1;
   string severity = 2;
   string message = 3;
